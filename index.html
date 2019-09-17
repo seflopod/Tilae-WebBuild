@@ -20,7 +20,7 @@
         <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
       </div>
     </div>
-    <div class="description-content">
+    <div class="description-content" style="position: absolute;top:calc(50%+270px);left:25%">
       <h2>Design Considerations</h2>
       <ul>
         <li>"Easy to learn, difficult to master" board game</li>
@@ -38,7 +38,7 @@
           <li>Each player needs a unique sound that can be used as a cue for turn order.</li>
         </ul>
         <p>For the UI we decided voiceover would be the best, while for the playable portions we decided to use a base note for each cell on the board which would be modified by the cell's state.  As a result of these decisions we found we needed more sounds than usual for a project of this size, along with a means of managing them that would be relatively easy.  I wrote a simple audio managment system to accomplish this goal.  The system is built on a custom asset (SoundLibrary) which contains a Dictionary with custom serialization.  The SoundLibrary can be queueried for a sound by name so by adhering to a solid naming convention finding sounds on the board is easy.  A sound is then applied to a relevant AudioSource and played once found.</p>
-        <img src="./img/tiles_soundlibrary.PNG" />
+        <img src="img/tiles_soundlibrary.PNG" />
       </div>
       <h3>AI</h3>
       <div class="section-description">
