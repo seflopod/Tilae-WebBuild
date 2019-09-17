@@ -27,7 +27,7 @@
         <li>Increased accessibiity for players with vision impairments</li>
         <li>An AI that is not a master of the game</li>
       </ul>
-      <h2>Coding Process</h2>
+      <h2>Notable Systems</h2>
       <h3>Audio</h3>
       <div class="section-description">
         <p>In order to better accomodate visually impaired players, we needed to make use of audio cues to communicate UI and game states.  We listed what that would mean:</p>
@@ -38,11 +38,25 @@
           <li>Each player needs a unique sound that can be used as a cue for turn order.</li>
         </ul>
         <p>For the UI we decided voiceover would be the best, while for the playable portions we decided to use a base note for each cell on the board which would be modified by the cell's state.  As a result of these decisions we found we needed more sounds than usual for a project of this size, along with a means of managing them that would be relatively easy.  I wrote a simple audio managment system to accomplish this goal.  The system is built on a custom asset (SoundLibrary) which contains a Dictionary with custom serialization.  The SoundLibrary can be queueried for a sound by name so by adhering to a solid naming convention finding sounds on the board is easy.  A sound is then applied to a relevant AudioSource and played once found.</p>
-        <iframe src="https://drive.google.com/file/d/13AS9bJ2oDpTLirPhsr6cdRCgqSGLPiRz/preview" width="640" height="480"></iframe>
+        <img src="/img/tiles_soundlibrary.PNG" />
       </div>
       <h3>AI</h3>
       <div class="section-description">
-        <p>We decided to use a simple decision-making process for the AI that sought to make the best play based on</p>
+        <p>We decided on creating a simple AI for play, as the general intent was for this to be a multiplayer game.  On a high level, the AI works by doing one of the following:</p>
+        <ol>
+          <li>If the game is in the place players state, place the piece for the agent.</li>
+          <li>If the game is in the initial plase tiles phase, place a tile in a random cell.</li>
+          <li>If there is only one other player alive that can be eliminated by placing a tile, use the place tile aciton.</li>
+          <li>If there is only one open cell around the agent, move to that cell.</li>
+          <li>Any other situation is the normal course of play.  Determine a score between 0 and 1 (inclusive) for each of the following actions and choose the one with the highest score:
+            <ul>
+              <li>Place a tile.</li>
+              <li>Move.</li>
+              <li>Push tiles.</li>
+            </ul>
+          </li>
+        </ol>
+        <p>The AI has some shortcuts for repeating moves too frequently which prevents stalemates when two or more agents are playing against each other.  The AI does not analyze much beyond the cells immediately surrounding it in order to ease development speed.</p>
       </div>
     </div>
   </body>
